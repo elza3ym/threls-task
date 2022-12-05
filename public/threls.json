@@ -1,0 +1,377 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0",
+    "title": "Thre.ls Task",
+    "contact": {}
+  },
+  "host": "threls.elza3ym.net",
+  "basePath": "/api",
+  "tags": [
+    {
+      "name": "Authentication"
+    },
+    {
+      "name": "Products"
+    },
+    {
+      "name": "Orders"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [],
+  "paths": {
+    "/auth/login": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Login",
+        "operationId": "Login",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "default": "Bearer {token}"
+          },
+          {
+            "in": "body",
+            "name": "Body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LoginRequest"
+            }
+          }
+        ],
+        "deprecated": false,
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/auth/register": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Register",
+        "operationId": "Register",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "default": "Bearer {token}"
+          },
+          {
+            "in": "body",
+            "name": "Body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RegisterRequest"
+            }
+          }
+        ],
+        "deprecated": false,
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/user": {
+      "get": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Get User Info",
+        "operationId": "GetUserInfo",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "security": [],
+        "deprecated": false,
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/auth/logout": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Logout",
+        "operationId": "Logout",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "security": [],
+        "deprecated": false,
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/products": {
+      "get": {
+        "tags": [
+          "Products"
+        ],
+        "summary": "List Products ( Paginate )",
+        "operationId": "ListProducts(Paginate)",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "security": [],
+        "deprecated": false,
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/products/108334/show": {
+      "get": {
+        "tags": [
+          "Products"
+        ],
+        "summary": "Get Product",
+        "operationId": "GetProduct",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "security": [],
+        "deprecated": false,
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/products/import": {
+      "post": {
+        "tags": [
+          "Products"
+        ],
+        "summary": "Import CSV Products Copy",
+        "operationId": "ImportCSVProductsCopy",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "file",
+            "in": "formData",
+            "description": "",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "security": [],
+        "deprecated": false,
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/products/update-cart": {
+      "post": {
+        "tags": [
+          "Products"
+        ],
+        "summary": "Add To Cart",
+        "operationId": "AddToCart",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AddToCartRequest"
+            }
+          }
+        ],
+        "security": [],
+        "deprecated": false,
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/order": {
+      "post": {
+        "tags": [
+          "Orders"
+        ],
+        "summary": "Place Order",
+        "operationId": "PlaceOrder",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "security": [],
+        "deprecated": false,
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {},
+  "definitions": {
+    "LoginRequest": {
+      "type": "object",
+      "required": [
+        "email",
+        "password"
+      ],
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      },
+      "title": "LoginRequest",
+      "example": {
+        "email": "admin@admin.com",
+        "password": "admin1234"
+      }
+    },
+    "RegisterRequest": {
+      "type": "object",
+      "required": [
+        "email",
+        "name",
+        "password",
+        "password_confirmation"
+      ],
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "password_confirmation": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "title": "RegisterRequest",
+      "example": {
+        "email": "admin1@admin.com",
+        "password": "admin1234",
+        "password_confirmation": "admin1234",
+        "name": "Mohamed"
+      }
+    },
+    "AddToCartRequest": {
+      "type": "object",
+      "required": [
+        "items"
+      ],
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Item"
+          }
+        }
+      },
+      "title": "AddToCartRequest",
+      "example": {
+        "items": [
+          {
+            "product_id": 108334,
+            "amount": 1
+          },
+          {
+            "product_id": 108334,
+            "amount": 1532
+          }
+        ]
+      }
+    },
+    "Item": {
+      "type": "object",
+      "required": [
+        "amount",
+        "product_id"
+      ],
+      "properties": {
+        "product_id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "amount": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "Item",
+      "example": {
+        "product_id": 108334,
+        "amount": 1
+      }
+    }
+  }
+}
