@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\ProductsImport;
 use App\Models\Product;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ProductController extends Controller
 {
@@ -15,27 +18,43 @@ class ProductController extends Controller
     public function index()
     {
         //
+        return Product::paginate(10);
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
+     * Import CSV file into Product Model
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function store(Request $request)
+    public function import(Request $request): JsonResponse
     {
         //
+        Excel::import(new ProductsImport(), $request->file, null, \Maatwebsite\Excel\Excel::CSV);
+        return response()->json([
+            'message' => 'Products Imported Successfully!',
+        ], 200);
+    }
+
+    /**
+     * Add Product into virtual cart using session
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function updateCart(Request $request): JsonResponse
+    {
+        //
+        $request->validate([
+            'items.*.product_id' => 'required|exists:products,id',
+            'items.*.amount' => 'required|integer',
+        ]);
+
+        session('cart', $request->items);
+
+        return response()->json([
+            'message' => 'Cart Updated Successfully!',
+        ], 200);
     }
 
     /**
@@ -47,6 +66,7 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         //
+        return $product;
     }
 
     /**
