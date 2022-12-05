@@ -31,7 +31,7 @@ class ProductController extends Controller
         $request->validate([
             'file' => 'required|mimes:csv'
         ]);
-        
+
         Excel::import(new ProductsImport(), $request->file, null, \Maatwebsite\Excel\Excel::CSV);
         return response()->json([
             'message' => 'Products Imported Successfully!',

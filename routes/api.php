@@ -23,9 +23,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 // Authentication Routes
 Route::group(['prefix' => 'auth'], function () {
-    Route::get('login', function () {
-        return "Please Login First";
-    })->name('login');
     Route::post('login', [AuthController::class, 'login']);
     Route::post('register', [AuthController::class, 'register']);
     Route::post('logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
